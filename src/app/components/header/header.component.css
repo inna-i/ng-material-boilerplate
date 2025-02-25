@@ -1,0 +1,17 @@
+header {
+    display: flex;
+    padding-inline: 16px;
+    padding-block: 18px;
+    background-color: #333;
+    color: white;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ul {
+    list-style: none;
+}
+
+li:hover {
+    cursor: pointer;
+}
