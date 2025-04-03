@@ -1,0 +1,31 @@
+<div class="container">
+  <h2>Current roles</h2>
+
+  <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="currentRoles" [cdkDropListConnectedTo]="doneList"
+     class="list" (cdkDropListDropped)="drop($event)">
+    <mat-action-list>
+      @for (item of currentRoles; track item) {
+        <div class="list-item d-flex p-3 mb-2 align-items-center" mat-list-item cdkDrag>
+          <mat-icon matListItemIcon>drag_indicator</mat-icon>
+          <span matListItemTitle>{{ item }}</span>
+        </div>
+      }
+    </mat-action-list>
+  </div>
+</div>
+
+<div class="container">
+  <h2>Other roles</h2>
+
+  <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="roles" [cdkDropListConnectedTo]="todoList" class="list"
+    (cdkDropListDropped)="drop($event)">   
+    <mat-action-list>
+      @for (item of roles; track item) {
+        <div class="list-item d-flex p-3 mb-2 align-items-center" mat-list-item cdkDrag>
+          <mat-icon matListItemIcon>drag_indicator</mat-icon>
+          <span matListItemTitle>{{ item }}</span>
+        </div>
+      }
+    </mat-action-list>
+  </div>
+</div>

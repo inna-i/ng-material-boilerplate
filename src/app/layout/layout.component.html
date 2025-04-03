@@ -1,0 +1,57 @@
+<mat-drawer-container>
+    <!-- Sidebar (Drawer) -->
+    <mat-drawer #drawer class="sidenav" color="primary" [attr.role]="isHandset ? 'dialog' : 'navigation'"
+        [mode]="isHandset ? 'over' : 'side'" [opened]="isHandset === false">
+        <mat-toolbar>
+            <span>AMUI</span>
+            <mat-icon class="material-symbols-outlined">api</mat-icon>
+        </mat-toolbar>
+        <mat-nav-list>
+            @for (route of routes; track route.path) {
+            <a mat-list-item [routerLink]="route.path" #link="routerLinkActive" routerLinkActive
+                [activated]="link.isActive">
+                @if (route.data && route.data['icon']) {
+                    <mat-icon matListItemIcon class="material-symbols-outlined">{{route.data['icon']}}</mat-icon>
+                }
+                <span>{{route.title}}</span>
+            </a>
+            }
+        </mat-nav-list>
+    </mat-drawer>
+
+    <mat-drawer-content #drawerContent>
+        <mat-toolbar color="primary" class="d-flex align-items-center justify-content-between w-100">
+            @if (isHandset) {
+            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            }
+            <h1 class="d-flex align-items-center">
+                <mat-icon class="material-symbols-outlined me-1">{{actualRoute.icon}}</mat-icon>
+                <span>{{actualRoute.title}}</span>
+            </h1>
+            <div class="d-flex align-items-center gap-3">
+                <app-theme-toggle></app-theme-toggle>
+                <button mat-stroked-button [matMenuTriggerFor]="menu">
+                    <mat-icon class="material-symbols-outlined">account_circle</mat-icon>
+                    Christofer Nolan
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item>
+                        <mat-icon class="material-symbols-outlined">person</mat-icon>
+                        <span>My Profile</span>
+                    </button>
+                    <button mat-menu-item>
+                        <mat-icon class="material-symbols-outlined">logout</mat-icon>
+                        <span>Sign Out</span>
+                    </button>
+                </mat-menu>
+            </div>
+        </mat-toolbar>
+        <div class="sidenav-scroll-wrapper">
+            <div class="sidenav-content">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>
